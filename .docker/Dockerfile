@@ -2,7 +2,9 @@ FROM jenkins/jenkins:2.375.1
 USER root
 
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
-ENV CASC_JENKINS_CONFIG /var/jenkins_home/jenkins_casc.yaml
+ENV CASC_JENKINS_CONFIG /tmp/jenkins/jenkins_casc.yaml
+
+CMD mkdir /tmp/jenkins
 
 RUN apt-get update && apt-get install -y lsb-release
 RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc https://download.docker.com/linux/debian/gpg
@@ -29,10 +31,10 @@ RUN jenkins-plugin-cli --plugins blueocean:1.26.0 docker-workflow:563.vd5d2e5c40
  timestamper:latest workflow-aggregator:latest ws-cleanup:latest authorize-project:latest
 
 # basically managing all the code-quality stuff, e.g. static code analysis and gcc/clang warnings
-RUN jenkins-plugin-cli --plugins code-coverage-api:3.4.1 warnings-ng:9.22.0 htmlpublisher:1.31
+RUN jenkins-plugin-cli --plugins checks-api:1.8.1 code-coverage-api:3.4.1 warnings-ng:9.22.0 htmlpublisher:1.31
 
 # just for a dirky dark look
-RUN jenkins-plugin-cli --plugins dark-theme:262.v0202a_4c8fb_6a
+RUN jenkins-plugin-cli --plugins theme-manager:1.6 instance-identity:142.v04572ca_5b_265 dark-theme:262.v0202a_4c8fb_6a
 
 CMD mkdir /ws/
 WORKDIR /ws/

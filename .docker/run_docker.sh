@@ -10,6 +10,6 @@ docker run -d --rm --name $name \
     --env="DISPLAY" \
     -p 8080:8080 \
     -p 50000:50000 \
-    -v `pwd`/jenkins_home:/var/jenkins_home \
-    -w `pwd` \
-    $dockername /bin/bash -c "$@"
+    -v $(pwd)/jenkins_home:$(pwd)/jenkins_home \
+    -v $(pwd)/jenkins_home/jenkins_casc.yaml:/tmp/jenkins/jenkins_casc.yaml \
+    $dockername /bin/bash -c "export JENKINS_HOME=$(pwd)/jenkins_home; $@"

@@ -1,4 +1,5 @@
 jenkins:
+  systemMessage: "DiSc21 Jenkins server configured automatically by Jenkins Configuration as Code plugin\n\n"
   securityRealm:
     local:
       allowsSignup: false
@@ -21,5 +22,8 @@ security:
 
 unclassified:
   location:
-    url: http://server_ip:8080/
+    url: http://localhost:8080/
+  themeManager:
+    disableUserThemes: true
+    theme: "dark"
 
