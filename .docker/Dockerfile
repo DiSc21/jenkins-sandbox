@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.375.1
+FROM jenkins/jenkins:2.375.2
 USER root
 
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
@@ -32,7 +32,7 @@ RUN jenkins-plugin-cli --plugins blueocean:1.26.0 docker-workflow:563.vd5d2e5c40
 
 # basically managing all the code-quality stuff, e.g. static code analysis and gcc/clang warnings
 RUN jenkins-plugin-cli --plugins scm-api:631.v9143df5b_e4a_a checks-api:1.8.1 code-coverage-api:3.4.1 warnings-ng:9.22.0 htmlpublisher:1.31
-
+RUN jenkins-plugin-cli --plugins github-api:1.303-400.v35c2d8258028 git-forensics:1.11.0 scm-manager:1.7.9
 # just for a dirky dark look
 RUN jenkins-plugin-cli --plugins theme-manager:1.6 instance-identity:142.v04572ca_5b_265 dark-theme:262.v0202a_4c8fb_6a
 

@@ -12,4 +12,5 @@ docker run -d --rm --name $name \
     -p 50000:50000 \
     -v $(pwd)/jenkins_home:$(pwd)/jenkins_home \
     -v $(pwd)/jenkins_home/jenkins_casc.yaml:/tmp/jenkins/jenkins_casc.yaml \
+    -w $(pwd)/jenkins_home \
     $dockername /bin/bash -c "export JENKINS_HOME=$(pwd)/jenkins_home; $@"

@@ -2,9 +2,7 @@
 
 source $(dirname "${BASH_SOURCE[0]}")/config.sh
 
-running_contis=$(docker ps --format "{{.Names}}")
-
-if [[ "${running_contis}" == *"${name}"* ]]
+if [[ $(docker ps | grep ${name}) ]]
 then
     docker stop $name
 else
